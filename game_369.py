@@ -53,8 +53,3 @@ def gameEngine(player_name, player_list):
         order = order % num_of_players
         i += 1
         time.sleep(0.5)
-
-loser = gameEngine('갑', ['갑','을','병','정'])
-print(loser)
-
-# 반환 값은 진 사람의 이름
