@@ -1,3 +1,4 @@
+# 완료 
 import random
 
 def get_random_vs_pair():
