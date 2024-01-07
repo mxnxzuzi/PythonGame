@@ -1,13 +1,9 @@
 import random
-#import game_369
-import json
-#import subwayGame
-import hayoung 
+import hayoung
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
-import time
 
 class NotInRangeError(Exception):
     pass
@@ -35,7 +31,7 @@ def gamestart():
         print("그래... 그냥 술이나 마시자")
         gamestate = False
         return
-    
+        
     while True:
         try:
             username = input('오늘 거하게 취해볼 당신의 이름은? : ')
@@ -99,10 +95,10 @@ def select_game():
     --------------------------------------------------
 
                     1. 369 게임
-                    2. 이구동성 게임 
+                    2. 이구동성 게임
                     3. 지하철 게임
-                    4.
-                    5. 
+                    4. 수도 맞히기 게임
+                    5. 슈퍼개미 게임
 
     --------------------------------------------------
     --------------------------------------------------
@@ -116,16 +112,17 @@ def select_game():
             
             print(f"{username}이(가) 고른 다음 게임은 {game_choice}번 게임이야!")
 
-            # if game_choice == 1:
-            #     return game_369.gameEngine(username, [player['name'] for player in players])
-            if game_choice == 2:
+            if game_choice == 1:
+                return game_369.gameEngine(username, [player['name'] for player in players])
+            elif game_choice == 2:
                 return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
-            # elif game_choice == 3:
-            #     incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
-            #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
+            elif game_choice == 3:
+                return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+            elif game_choice == 4:
+                return game_capital.capital_game(username, players)
+            elif game_choice == 5:
+                return pythongame5.antgame(players, username)
+                     
 
         except ValueError:
             print('숫자를 입력해주세요!')
@@ -135,20 +132,20 @@ def select_game():
 def select_game_auto(cur_selector):
     game_choice = str(random.randint(1, 5))
     print("""
-          --------------------------------------------------
-                       🍺오늘의 Alcohol GAME🍺
-          --------------------------------------------------
+    --------------------------------------------------
+                🍺오늘의 Alcohol GAME🍺
+    --------------------------------------------------
 
-                        1. 369 게임
-                        2. 
-                        3. 지하철 게임
-                        4.
-                        5. 
-    
-          --------------------------------------------------
-          --------------------------------------------------
+                    1. 369 게임
+                    2. 이구동성 게임
+                    3. 지하철 게임
+                    4. 수도 맞히기 게임
+                    5. 슈퍼개미 게임
 
-          """)
+    --------------------------------------------------
+    --------------------------------------------------
+
+    """)
     user_input = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 'exit'를, 계속하고 싶으면 아무 키나 입력해주세요: ")
     if user_input.lower() == 'exit':
         print("게임을 종료합니다.")
@@ -157,16 +154,16 @@ def select_game_auto(cur_selector):
         return None
     else:
         print(f"{cur_selector}이(가) 고른 다음 게임은 {game_choice}번 게임이야!")
-        # if game_choice == "1":
-        #     return game_369.gameEngine(username, [player['name'] for player in players])
-        if game_choice == 2:
-                return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
-        # elif game_choice == 3:
-        #         incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
-        #elif*************여기에 각자 게임추가하기*************
-        #elif*************여기에 각자 게임추가하기*************
-        #elif*************여기에 각자 게임추가하기*************
-        #elif*************여기에 각자 게임추가하기*************
+        if game_choice == '1':
+            return game_369.gameEngine(username, [player['name'] for player in players])
+        elif game_choice == '2':
+            return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
+        elif game_choice == '3':
+            return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+        elif game_choice == '4':
+            return game_capital.capital_game(username, players)
+        elif game_choice == '5':
+            return pythongame5.antgame(players, username)
 
     print("""
           ---------------------------------------------------------------------------------------------------------------------------
@@ -240,7 +237,6 @@ def main():
         else:
             print("한 바퀴 다 돌았네~")
             game_selector = [player['name'] for player in players]
-            game_selector.append(username)
         
     print("""
     --------------------------------------------------------------------------
