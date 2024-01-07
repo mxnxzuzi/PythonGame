@@ -217,9 +217,7 @@ def main():
         if username in game_selector:
             player_lost = select_game()
             game_selector.remove(username)
-
             drink_phase(players, player_lost)
-            
             if check_game_end(players):
                 gamestate = False
 
@@ -227,6 +225,8 @@ def main():
             cur_selector = game_selector.pop()
             player_lost = select_game_auto(cur_selector)
             drink_phase(players, player_lost)
+            if check_game_end(players):
+                gamestate = False
 
         else:
             print("한 바퀴 다 돌았네~")
@@ -238,7 +238,7 @@ def main():
     --------------------------------------------------------------------------
             
     
-    ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+     ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
     ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
     ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
     ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
