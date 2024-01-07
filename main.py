@@ -1,9 +1,19 @@
 import random
+
+gamestate = False
+drinklimit = 0
+
+#게임 시작시 필요한 정보 받는 함수
+def gamestart():
+    global gamestate, drinklimit, username
+import game_369
+import json
+import subwayGame
+import pythongame5
+import game_capital
 import hayoung
 #***********여기에 각자 게임 모듈 임포트*********
-#***********여기에 각자 게임 모듈 임포트*********
-#***********여기에 각자 게임 모듈 임포트*********
-#***********여기에 각자 게임 모듈 임포트*********
+import time
 
 class NotInRangeError(Exception):
     pass
@@ -28,7 +38,6 @@ def gamestart():
     if (start == 'y'):
         gamestate = True
     else:
-        print("그래... 그냥 술이나 마시자")
         gamestate = False
         return
         
