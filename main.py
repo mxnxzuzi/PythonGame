@@ -39,8 +39,7 @@ def gamestart():
         gamestate = True
     else:
         gamestate = False
-        return
-        
+        return    
     while True:
         try:
             username = input('오늘 거하게 취해볼 당신의 이름은? : ')
