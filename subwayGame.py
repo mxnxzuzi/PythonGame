@@ -14,7 +14,12 @@ def subwayGame_start(line_num_dict, user, friends):
     while True:
         for player in players:
 
-            selected_station = input(f"{player['name']}, 어떤 역을 선택하시겠습니까?🤔 ")
+            if player['name'] == user:
+                selected_station = input(f"{player['name']}, 어떤 역을 선택하시겠습니까?🤔 ")
+            else:
+                selected_station = random.choice(line_num_dict[random_line_num])
+                print(f"{player['name']}, {selected_station}을(를) 선택했습니다.")
+
 
             if selected_station in used_stations:
                 print("어❓❓ 🤣 바보샷ㅋ 🍻 🤣 바보샷ㅋ 🍻")
@@ -36,15 +41,12 @@ def subwayGame_start(line_num_dict, user, friends):
 def initialize_players(user, friends):
     player_names = [user] + friends
     players = []
-    for i in range(1, 6):
-        player_name = random.choice(player_names)
-        
+    for i, player_name in enumerate(player_names, start=1):
         player = {
             "id": i,
             "name": player_name,
-            "current_station": None, 
+            "current_station": None,
         }
         players.append(player)
-        
 
     return players
