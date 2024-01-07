@@ -1,8 +1,15 @@
 import random
+
+gamestate = False
+drinklimit = 0
+
+#게임 시작시 필요한 정보 받는 함수
+def gamestart():
+    global gamestate, drinklimit, username
 import game_369
 import json
 import subwayGame
-#***********여기에 각자 게임 모듈 임포트*********
+import pythongame5
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
@@ -31,10 +38,9 @@ def gamestart():
     if (start == 'y'):
         gamestate = True
     else:
-        print("그래... 그냥 술이나 마시자")
         gamestate = False
         return
-    
+        
     while True:
         try:
             username = input('오늘 거하게 취해볼 당신의 이름은? : ')
@@ -101,7 +107,7 @@ def select_game():
                     2. 
                     3. 지하철 게임
                     4.
-                    5. 
+                    5. 슈퍼개미 게임
 
     --------------------------------------------------
     --------------------------------------------------
@@ -119,10 +125,11 @@ def select_game():
                 return game_369.gameEngine(username, [player['name'] for player in players])
             elif game_choice == 3:
                 return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+            elif game_choice == 5:
+                return pythongame5.antgame(players, username)
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
+            
 
         except ValueError:
             print('숫자를 입력해주세요!')
@@ -140,7 +147,7 @@ def select_game_auto(cur_selector):
                     2. 
                     3. 지하철 게임
                     4.
-                    5. 
+                    5. 슈퍼개미 게임
 
     --------------------------------------------------
     --------------------------------------------------
@@ -158,8 +165,8 @@ def select_game_auto(cur_selector):
             return game_369.gameEngine(username, [player['name'] for player in players])
         elif game_choice == 3:
             return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
-        #elif*************여기에 각자 게임추가하기*************
-        #elif*************여기에 각자 게임추가하기*************
+        elif game_choice == 5:
+                return pythongame5.antgame(players, username)
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
 
