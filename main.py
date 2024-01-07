@@ -118,7 +118,7 @@ def select_game():
             if game_choice == 1:
                 return game_369.gameEngine(username, [player['name'] for player in players])
             elif game_choice == 3:
-                incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+                return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
@@ -132,20 +132,20 @@ def select_game():
 def select_game_auto(cur_selector):
     game_choice = str(random.randint(1, 5))
     print("""
-          --------------------------------------------------
-                       🍺오늘의 Alcohol GAME🍺
-          --------------------------------------------------
+    --------------------------------------------------
+                🍺오늘의 Alcohol GAME🍺
+    --------------------------------------------------
 
-                        1. 369 게임
-                        2. 
-                        3. 지하철 게임
-                        4.
-                        5. 
-    
-          --------------------------------------------------
-          --------------------------------------------------
+                    1. 369 게임
+                    2. 
+                    3. 지하철 게임
+                    4.
+                    5. 
 
-          """)
+    --------------------------------------------------
+    --------------------------------------------------
+
+    """)
     user_input = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 'exit'를, 계속하고 싶으면 아무 키나 입력해주세요: ")
     if user_input.lower() == 'exit':
         print("게임을 종료합니다.")
@@ -157,7 +157,7 @@ def select_game_auto(cur_selector):
         if game_choice == "1":
             return game_369.gameEngine(username, [player['name'] for player in players])
         elif game_choice == 3:
-                incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+            return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
