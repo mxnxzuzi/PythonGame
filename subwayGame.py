@@ -1,14 +1,15 @@
 import json
 import random
 
-def subwayGame_start(line_num_dict):
+def subwayGame_start(line_num_dict, user, friends):
+    
     print("🚇 지하철~지하철~지하철~지하철 🚇 🤔 몇호선~몇호선~몇호선~몇호선~ 🤔")
     random_line_num = random.choice(list(line_num_dict.keys()))
     print(f"[{random_line_num}]")
 
     used_stations = set()
 
-    players = initialize_players()
+    players = initialize_players(user, friends)
 
     while True:
         for player in players:
@@ -17,47 +18,33 @@ def subwayGame_start(line_num_dict):
 
             if selected_station in used_stations:
                 print("어❓❓ 🤣 바보샷ㅋ 🍻 🤣 바보샷ㅋ 🍻")
-                exit()
+                return
 
             if selected_station not in line_num_dict[random_line_num]:
-                print(f"🤪 아 누가 술을 마셔 🤪 {player['name']}가 술을마셔~ 🍻 원~ 샷~ ☠️")
-                exit()
+                print(f"🤪 아 누가 술을 마셔 🤪 {player['name']}(이)가 술을마셔~ 🍻 원~ 샷~ ☠️")
+                return
 
+            else :
+                print("통과~")
             used_stations.add(selected_station)
             player['current_station'] = selected_station
             
             if not used_stations:
                 print("모든 역을 다 선택하셨습니다. 게임 종료!")
-                exit()
+                return
 
-def initialize_players():
-    player_names = ["짱구", "유리", "훈이", "철수", "맹구"]
+def initialize_players(user, friends):
+    player_names = [user] + friends
     players = []
-
     for i in range(1, 6):
         player_name = random.choice(player_names)
-
+        
         player = {
             "id": i,
             "name": player_name,
-            "current_station": None  
+            "current_station": None, 
         }
         players.append(player)
+        
 
     return players
-
-with open('sub.json', 'r', encoding='utf-8') as file:
-    data = json.load(file)
-
-line_num_dict = {}
-
-for entry in data:
-    line_num = entry.get("line_num", "")
-    station_nm = entry.get("station_nm", "")
-
-    if line_num in line_num_dict:
-        line_num_dict[line_num].append(station_nm)
-    else:
-        line_num_dict[line_num] = [station_nm]
-
-subwayGame_start(line_num_dict)

@@ -1,12 +1,32 @@
 import random
+import json
 import hayoung
-#***********여기에 각자 게임 모듈 임포트*********
+import subwayGame
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 
+#지하철게임 정보 불러오기
+def load_subway_data():
+    with open('sub.json', 'r', encoding='utf-8') as file:
+        data = json.load(file)
+
+    line_num_dict = {}
+
+    for entry in data:
+        line_num = entry.get("line_num", "")
+        station_nm = entry.get("station_nm", "")
+
+        if line_num in line_num_dict:
+            line_num_dict[line_num].append(station_nm)
+        else:
+            line_num_dict[line_num] = [station_nm]
+
+    return line_num_dict
+
 gamestate = False
 drinklimit = 0
+line_num_dict = load_subway_data() #지하철게임 정보 함수호출
 
 def gamestart():
     global gamestate, drinklimit, username
@@ -56,7 +76,6 @@ def playerselect(username, drinklimit):
         playernum = input('함께 취할 친구들은 얼마나 필요하신가요?(사회적 거리두기로 인해 최대 3명까지 초대할 수 있어요!) : ')
         
         for _ in range(int(playernum)):
-           
             random_player = random.choice(playerlist)
             random_drink_limit = random.choice([2, 4, 6, 8, 10])
             players.append({'name': random_player, 'drink_limit': random_drink_limit})
@@ -80,7 +99,7 @@ def select_game():
           --------------------------------------------------
 
                         1. 이구동성 게임
-                        2.
+                        2. 지하철 게임
                         3.
                         4.
                         5. 
@@ -92,8 +111,8 @@ def select_game():
         game_choice = input("실행하고 싶은 게임 번호를 선택해주세요 : ")
         if game_choice == "1":
             return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
-        
-        #elif*************여기에 각자 게임추가하기*************
+        elif game_choice == "2":
+            subwayGame.subwayGame_start(line_num_dict, username, [player['name'] for player in players if player['name'] != username])
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
@@ -109,7 +128,7 @@ def select_game_auto():
           --------------------------------------------------
 
                         1. 이구동성 게임
-                        2.
+                        2. 지하철 게임
                         3.
                         4.
                         5. 
@@ -128,7 +147,8 @@ def select_game_auto():
         print(f"다음 게임은 {game_choice}번 게임입니다.")
         if game_choice == "1":
             return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
-        
+        elif game_choice == "2":
+            subwayGame.subwayGame_start(line_num_dict, username, [player['name'] for player in players if player['name'] != username])
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
@@ -199,7 +219,6 @@ while gamestate:
 
           """)
             break
-
 
 
     
