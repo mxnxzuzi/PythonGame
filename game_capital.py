@@ -39,7 +39,7 @@ def capital_game(player_name, friends):
 
             if player['name'] != player_name:
                 if random.random() < 0.2:
-                    answer = "뭐였지..?"
+                    answer = "뭐였지..?😢"
                 else:
                     answer = capital
                 print("{}님, {}의 수도는 어디일까요? {}".format(player['name'], country, answer))
@@ -47,12 +47,11 @@ def capital_game(player_name, friends):
                 answer = input("{}님, {}의 수도는 어디일까요? ".format(player['name'], country))
 
             if answer == capital:
-                print("어케알았노!")
+                print("어케알았노!😒🤨")
                 current_player = (current_player + 1) % len(friends)
             else:
-                print("땡. 한 잔 마시세요~ {}의 수도는 {}거든~".format(country, capital))
+                print("땡. 한 잔 마시세요~😁🤣 {}의 수도는 {}거든~".format(country, capital))
                 token = 1
-                player['drink_limit'] -= 1
                 break
         if token == 1:
             return [player['name']]
