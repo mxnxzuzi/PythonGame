@@ -1,6 +1,5 @@
 import random
 import json
-import hayoung
 import subwayGame
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
@@ -112,8 +111,8 @@ def select_game():
             if not (1<=game_choice<=5):
                 raise NotInRangeError
             
-            if game_choice == 1:
-                return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
+            # if game_choice == 1:
+            #     return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
             elif game_choice == 2:
                 incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
                 print("Incorrect Users:", incorrect_users)
@@ -152,10 +151,10 @@ def select_game_auto():
         return None
     else:
         print(f"다음 게임은 {game_choice}번 게임입니다.")
-        if game_choice == 1:
-            return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
+        # if game_choice == 1:
+        #     return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
         elif game_choice == 2:
-                subwayGame.subwayGame_start(line_num_dict, username, [player['name'] for player in players if player['name'] != username])
+                subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
                 
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
