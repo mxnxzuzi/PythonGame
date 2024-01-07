@@ -246,7 +246,6 @@ def main():
         else:
             print("한 바퀴 다 돌았네~")
             game_selector = [player['name'] for player in players]
-            game_selector.append(username)
         
     print("""
     --------------------------------------------------------------------------
