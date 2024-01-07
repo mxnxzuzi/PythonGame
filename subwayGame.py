@@ -1,7 +1,20 @@
 import json
 import random
 
-def subwayGame_start(line_num_dict, user, friends):
+def subwayGame_start(user, friends):
+    with open('sub.json', 'r', encoding='utf-8') as file:
+        data = json.load(file)
+
+    line_num_dict = {}
+
+    for entry in data:
+        line_num = entry.get("line_num", "")
+        station_nm = entry.get("station_nm", "")
+
+        if line_num in line_num_dict:
+            line_num_dict[line_num].append(station_nm)
+        else:
+            line_num_dict[line_num] = [station_nm]
     
     print("🚇 지하철~지하철~지하철~지하철 🚇 🤔 몇호선~몇호선~몇호선~몇호선~ 🤔")
     random_line_num = random.choice(list(line_num_dict.keys()))
@@ -27,7 +40,7 @@ def subwayGame_start(line_num_dict, user, friends):
 
             if selected_station not in line_num_dict[random_line_num]:
                 print(f"🤪 아 누가 술을 마셔 🤪 {player['name']}(이)가 술을마셔~ 🍻 원~ 샷~ ☠️")
-                return
+                return 
 
             else :
                 print("통과~")
@@ -45,7 +58,7 @@ def initialize_players(user, friends):
         player = {
             "id": i,
             "name": player_name,
-            "current_station": None,
+            "current_station": None
         }
         players.append(player)
 
