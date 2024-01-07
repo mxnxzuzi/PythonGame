@@ -52,7 +52,6 @@ def capital_game(player_name, friends):
             else:
                 print("땡. 한 잔 마시세요~ {}의 수도는 {}거든~".format(country, capital))
                 token = 1
-                player['drink_limit'] -= 1
                 break
         if token == 1:
             return [player['name']]
