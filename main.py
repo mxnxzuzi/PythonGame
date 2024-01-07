@@ -102,7 +102,6 @@ while gamestate:
             '핀란드': '헬싱키',
             '포르투갈': '리스본',
             '필리핀': '마닐라',
-
         }
         countries = list(countries_capitals.keys())
         token = 0
@@ -112,7 +111,16 @@ while gamestate:
             for player in players:
                 country = random.choice(countries)
                 capital = countries_capitals[country]
-                answer = input("{}님, {}의 수도는 어디일까요? ".format(player['name'], country))
+
+                if player['name'] != username:
+                    if random.random() < 0.2:
+                        answer = "뭐였지..?"
+                    else:
+                        answer = capital
+                    print("{}님, {}의 수도는 어디일까요? {}".format(player['name'], country, answer))
+                else:
+                    answer = input("{}님, {}의 수도는 어디일까요? ".format(player['name'], country))
+
                 if answer == capital:
                     print("어케알았노!")
                     current_player = (current_player + 1) % len(players)
@@ -123,13 +131,16 @@ while gamestate:
                     break
             if token == 1:
                 break
+
     # 1번을 선택하면 수도 게임 실행
-    if game_type == '1' :
+    if game_type == '1':
         capital_game()
-    #수도 게임 종료 후 현 상황 출력
-    print("~"*74)
+
+    # 수도 게임 종료 후 현 상황 출력
+    print("~" * 74)
     for player in players:
         print("{0}는 지금까지 {1}🍺! 치사량까지 {2}".format(player['name'], "0", player['drink_limit']))
+
     
     for player in players:
         if player["drink_limit"] == 0:
