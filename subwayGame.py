@@ -1,7 +1,7 @@
 import json
 import random
 
-def start_game(line_num_dict):
+def subwayGame_start(line_num_dict):
     print("🚇 지하철~지하철~지하철~지하철 🚇 🤔 몇호선~몇호선~몇호선~몇호선~ 🤔")
     random_line_num = random.choice(list(line_num_dict.keys()))
     print(f"[{random_line_num}]")
@@ -16,7 +16,7 @@ def start_game(line_num_dict):
             selected_station = input(f"{player['name']}, 어떤 역을 선택하시겠습니까?🤔 ")
 
             if selected_station in used_stations:
-                print("어❓❓ 🤣바보샷ㅋ🍻 🤣바보샷ㅋ🍻")
+                print("어❓❓ 🤣 바보샷ㅋ 🍻 🤣 바보샷ㅋ 🍻")
                 exit()
 
             if selected_station not in line_num_dict[random_line_num]:
@@ -60,4 +60,4 @@ for entry in data:
     else:
         line_num_dict[line_num] = [station_nm]
 
-start_game(line_num_dict)
+subwayGame_start(line_num_dict)
