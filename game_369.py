@@ -8,8 +8,11 @@ def gameEngine(player_name, player_list):
     random.shuffle(player_list)
     my_position = player_list.index(player_name)
     num_of_players = len(player_list)
-    print("플레이 순서는",player_list,"야~")
-    print("3~6 9 369! 3~6 9 369!")
+    print("플레이 순서는"," ➭ ".join(player_list),"야~")
+    print("3️⃣ ~ 6️⃣  9️⃣  3️⃣  6️⃣  9️⃣!")
+    time.sleep(0.5)
+    print("3️⃣ ~ 6️⃣  9️⃣  3️⃣  6️⃣  9️⃣!")
+    print("-"*50)
 
     # 순서 / 숫자 / NPC의 실패확률
     order = 0
@@ -23,15 +26,15 @@ def gameEngine(player_name, player_list):
             if  clap > 0 and answer.count('짝') != clap:
                 print(f"{answer}...")
                 time.sleep(1)
-                print("앗! 실수했다!")
-                return
+                print(f"{player_name} : 앗! 실수했다!")
+                return [player_name]
             elif clap == 0 and answer != str(i):
                  print(f"{answer}...")
                  time.sleep(1)
-                 print("아... 잘못 말했네!")
-                 return player_name
+                 print(f"{player_name} : 아... 잘못 말했네!")
+                 return [player_name]
             else:
-                print(f"나 :", answer)
+                print(f"{player_name} :", answer)
         else:
             if clap:
                 if random.random() > fail_prob * (clap+1):
@@ -39,15 +42,15 @@ def gameEngine(player_name, player_list):
                 else:
                     print(f'{player_list[order]} :','짝'*(clap-1),"...")
                     time.sleep(1)
-                    print('앗, 실수했다...')
-                    return player_list[order]
+                    print(f'{player_list[order]} : 앗, 실수했다...')
+                    return [player_list[order]]
             else:
                 if random.random() > fail_prob:
                     print(f'{player_list[order]} : {i}')
                 else:
                     time.sleep(1)
-                    print("어... 다음이 뭐였더라?")
-                    return player_list[order]
+                    print(f"{player_list[order]} :어... 다음이 뭐였더라?")
+                    return [player_list[order]]
             
         order += 1
         order = order % num_of_players
