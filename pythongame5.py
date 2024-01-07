@@ -26,29 +26,38 @@ fail_player =[]
 def antgame(players, username):
     num_of_random_numbers = len(players)
     random_numbers = random.sample(number_range, num_of_random_numbers)
+    print(random_numbers)
 
     print('개미는~뚠뚠!🐜 오늘도~뚠뚠!🐜 열심히~주식~하네~🐜 오늘의 주식이 상승했는지 하강했는지 맞춰보세요!')
 
     for i in range(len(players)):
         print(f"{players[i]['name']}님 차례입니다")
         print(f"{item_names[random_numbers[i]]}는 오늘 상승했을까요? 하락했을까요?")
-        try:
-            if(players[i]['name']==username):
-                answer=input('1.상승 2.하락 :')
-                if not (answer=='1' or answer =='2'):
-                    raise ValueError
-        except ValueError:
-            print("1과 2만 입력해주세요!")
-        else:
-            answer=random.choice(['1', '2'])
-        if((answer=='1' and item_change[random_numbers[i]]=='상승') or (answer=='2' and item_change[random_numbers[i]]=='하락')):
-            print("정답입니다! 촉이 좋은 개미시군요!!😎")
-            print(f"{item_names[random_numbers[i]]}는 오늘 {item_change_value[random_numbers[i]]} {item_change[random_numbers[i]]}했어\n")
-        else:
-            print("당신은 주식하면 큰일나겠네요!😮")
-            print(f"{item_names[random_numbers[i]]}는 오늘 {item_change_value[random_numbers[i]]} {item_change[random_numbers[i]]}했어")
-            print(f"{players[i]['name']} 한잔해~🍻\n")
-            fail_player.append(players[i]['name'])
+
+        while True:
+            try:
+                if(players[i]['name']==username):
+                    answer=input('1.상승 2.하락 :')
+                    if not (answer=='1' or answer =='2'):
+                        raise ValueError
+                else:
+                    answer=random.choice(['1', '2'])
+                    if answer=='1':
+                        print('상승한다!📈')
+                    else:
+                        print('하락한다!⬇️')
+                if((answer=='1' and item_change[random_numbers[i]]=='상승') or (answer=='2' and item_change[random_numbers[i]]=='하락')):
+                    print("정답입니다! 촉이 좋은 개미시군요!!😎")
+                    print(f"{item_names[random_numbers[i]]}는 오늘 {item_change_value[random_numbers[i]]} {item_change[random_numbers[i]]}했어\n")
+                    break
+                else:
+                    print("당신은 주식하면 큰일나겠네요!😮")
+                    print(f"{item_names[random_numbers[i]]}는 오늘 {item_change_value[random_numbers[i]]} {item_change[random_numbers[i]]}했어")
+                    print(f"{players[i]['name']} 한잔해~🍻\n")
+                    fail_player.append(players[i]['name'])
+                    break
+            except ValueError:
+                print("1과 2만 입력해주세요!")
         time.sleep(1)
     return fail_player
 
