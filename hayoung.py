@@ -5,43 +5,72 @@ def get_random_vs_pair():
         lines = file.readlines()
         return random.choice(lines).strip()
 
-def play_egudongseong_game(player_name, friends):
-    vs_pair = get_random_vs_pair()
-    choices = vs_pair.split(' vs ')
-    print(f"{vs_pair} - 선택하세요!")
+def play_egudongseong_game(username, friends):
+    players = [{'name': username}] + [{'name': friend} for friend in friends]
+    for player in players:
+        player['score'] = 0
 
-    player_choices = {}
-    total_players = [player_name] + friends
+    for round_number in range(1, 4):
+        print(f"{round_number} 라운드 시작!!")
+        vs_pair = get_random_vs_pair()
+        choices = vs_pair.split(' vs ')
+        print(f"{vs_pair} - 선택하세요!")
 
-    if len(total_players) == 4:  # 플레이어가 4명인 경우
-        teams = [total_players[:2], total_players[2:]]
-        print(f"{teams[0][0]}과 {teams[0][1]}이 1팀이고, {teams[1][0]}과 {teams[1][1]}은 2팀입니다.")
-        results = []
+        player_choices = {}
+        for player in players:
+            if player['name'] == username:
+                while True:
+                    choice = input(f"{username}의 선택: ")
+                    if choice in choices:
+                        break
+                    else:
+                        print("잘못된 입력입니다.")
+            else:
+                choice = random.choice(choices)
+            player_choices[player['name']] = choice
 
-        for team in teams:
-            team_choice = set()
-            for member in team:
-                if member == player_name:
-                    while True:
-                        choice = input(f"{player_name}의 선택: ")
-                        if choice in choices:
-                            break
-                        else:
-                            print("잘못된 값입니다. 다시 입력하세요.")
+            #print(f"{player['name']}의 이구동성 게임 점수는: {player['score']}점")
+
+        # 점수 계산
+        if len(players) <= 3:
+            if len(set(player_choices.values())) == 1:
+                print("모든 선택이 일치합니다!")
+                for player in players:
+                    player['score'] += 3
+            else:
+                print("선택이 일치하지 않습니다.")
+        else:
+            # 4명 이상일 경우
+            teams = [players[i:i+2] for i in range(0, len(players), 2)]
+            for i, team in enumerate(teams, start=1):
+                print(f"{i}팀 차례입니다.")
+                team_choices = set()
+                for player in team:
+                    player_choice = player_choices[player['name']]
+                    print(f"{player['name']}의 선택: {player_choice}")
+                    team_choices.add(player_choice)
+                if len(team_choices) == 1:
+                    print(f"{i}팀 성공!")
+                    for player in team:
+                        player['score'] += 3
                 else:
-                    choice = random.choice(choices)
-                team_choice.add(choice)
-                results.append({'name': member, 'choice': choice, 'lost': False})
-            
-            team_win = len(team_choice) == 1
-            for result in results:
-                if result['name'] in team:
-                    result['lost'] = not team_win
+                    print(f"{i}팀 실패!")
+                print("-----------------------")
 
-        return results
-    else:  # 그 외의 경우
-        player_choices[player_name] = input(f"{player_name}의 선택: ")
-        for friend in friends:
-            player_choices[friend] = random.choice(choices)
-        all_same = len(set(player_choices.values())) == 1
-        return [{'name': name, 'choice': choice, 'lost': not all_same} for name, choice in player_choices.items()]
+
+    for player in players:
+        print(f"{player['name']}의 이구동성 게임 점수는: {player['score']}점")        
+
+    min_score = min(player['score'] for player in players)
+    player_lost = [player['name'] for player in players if player['score'] == min_score]
+    
+    
+
+
+    if player_lost:
+        print(f"이번 게임의 패배자는 {', '.join(player_lost)} 입니다.")
+    # else:
+    #     print("패배자가 없습니다.")
+
+
+    return player_lost
