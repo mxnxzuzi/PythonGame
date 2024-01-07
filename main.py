@@ -11,7 +11,7 @@ import json
 import subwayGame
 import pythongame5
 import game_capital
-import hayoung
+import egudongseong
 #***********여기에 각자 게임 모듈 임포트*********
 import time
 
@@ -124,7 +124,7 @@ def select_game():
             if game_choice == 1:
                 return game_369.gameEngine(username, [player['name'] for player in players])
             elif game_choice == 2:
-                return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
+                return egudongseong.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
             elif game_choice == 3:
                 return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
             elif game_choice == 4:
@@ -166,7 +166,7 @@ def select_game_auto(cur_selector):
         if game_choice == '1':
             return game_369.gameEngine(username, [player['name'] for player in players])
         elif game_choice == '2':
-            return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
+            return egudongseong.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
         elif game_choice == '3':
             return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
         elif game_choice == '4':
