@@ -24,7 +24,7 @@ def gameEngine(player_name, player_list):
         if order == my_position:
             answer = input()
             if  clap > 0 and answer.count('짝') != clap:
-                print(f"{answer}...")
+                print(f"{player_name} : {answer}...")
                 time.sleep(1)
                 print(f"{player_name} : 앗! 실수했다!")
                 return [player_name]
