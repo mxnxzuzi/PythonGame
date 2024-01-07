@@ -32,7 +32,7 @@ def subwayGame_start(user, friends):
             if player['name'] == user:
                 selected_station = input(f"{player['name']}, 어떤 역을 선택하시겠습니까?🤔 ")
             else:
-                if random.random() < 0.15: #틀릴확률 15%
+                if random.random() < 0.2: #틀릴확률 20%
                     other_line_nums = [line_num for line_num in line_num_dict.keys() if line_num != random_line_num]
                     selected_line_num = random.choice(other_line_nums)
                     selected_station = random.choice(line_num_dict[selected_line_num])

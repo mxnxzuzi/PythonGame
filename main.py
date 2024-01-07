@@ -1,5 +1,7 @@
 import random
 import game_369
+import json
+import subwayGame
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
@@ -96,8 +98,8 @@ def select_game():
     --------------------------------------------------
 
                     1. 369 게임
-                    2.
-                    3.
+                    2. 
+                    3. 지하철 게임
                     4.
                     5. 
 
@@ -115,7 +117,8 @@ def select_game():
 
             if game_choice == 1:
                 return game_369.gameEngine(username, [player['name'] for player in players])
-            
+            elif game_choice == 3:
+                incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
@@ -133,9 +136,9 @@ def select_game_auto(cur_selector):
                        🍺오늘의 Alcohol GAME🍺
           --------------------------------------------------
 
-                        1. 이구동성 게임
-                        2.
-                        3.
+                        1. 369 게임
+                        2. 
+                        3. 지하철 게임
                         4.
                         5. 
     
@@ -153,7 +156,8 @@ def select_game_auto(cur_selector):
         print(f"{cur_selector}이(가) 고른 다음 게임은 {game_choice}번 게임이야!")
         if game_choice == "1":
             return game_369.gameEngine(username, [player['name'] for player in players])
-        
+        elif game_choice == 3:
+                incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
