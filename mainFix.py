@@ -115,7 +115,8 @@ def select_game():
             if game_choice == 1:
                 return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
             elif game_choice == 2:
-                subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+                incorrect_users = subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+                print("Incorrect Users:", incorrect_users)
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
             #elif*************여기에 각자 게임추가하기*************
@@ -155,6 +156,7 @@ def select_game_auto():
             return hayoung.play_egudongseong_game(username, [player['name'] for player in players if player['name'] != username])
         elif game_choice == 2:
                 subwayGame.subwayGame_start(line_num_dict, username, [player['name'] for player in players if player['name'] != username])
+                
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
         #elif*************여기에 각자 게임추가하기*************
