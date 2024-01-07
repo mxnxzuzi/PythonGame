@@ -55,9 +55,4 @@ def capital_game(player_name, friends):
                 player['drink_limit'] -= 1
                 break
         if token == 1:
-            break
-
- # 수도 게임 종료 후 현 상황 출력
-print("~" * 74)
-#for player in friends:
-#    print("{0}는 지금까지 {1}🍺! 치사량까지 {2}".format(player['name'], "0", player['drink_limit']))
+            return [player['name']]

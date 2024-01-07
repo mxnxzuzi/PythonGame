@@ -1,5 +1,15 @@
 import random
+
+gamestate = False
+drinklimit = 0
+
+#게임 시작시 필요한 정보 받는 함수
+def gamestart():
+    global gamestate, drinklimit, username
 import game_369
+import json
+import subwayGame
+import pythongame5
 import game_capital
 #***********여기에 각자 게임 모듈 임포트*********
 #***********여기에 각자 게임 모듈 임포트*********
@@ -28,10 +38,9 @@ def gamestart():
     if (start == 'y'):
         gamestate = True
     else:
-        print("그래... 그냥 술이나 마시자")
         gamestate = False
         return
-    
+        
     while True:
         try:
             username = input('오늘 거하게 취해볼 당신의 이름은? : ')
@@ -95,10 +104,10 @@ def select_game():
     --------------------------------------------------
 
                     1. 369 게임
-                    2.
-                    3.
+                    2. 
+                    3. 지하철 게임
                     4. 수도 맞히기 게임
-                    5. 
+                    5. 슈퍼개미 게임
 
     --------------------------------------------------
     --------------------------------------------------
@@ -114,12 +123,14 @@ def select_game():
 
             if game_choice == 1:
                 return game_369.gameEngine(username, [player['name'] for player in players])
-            
-            #elif*************여기에 각자 게임추가하기*************
-            #elif*************여기에 각자 게임추가하기*************
+            elif game_choice == 3:
+                return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+            elif game_choice == 5:
+                return pythongame5.antgame(players, username)
             elif game_choice == 4:
-                game_capital.capital_game(username, players)
+                return game_capital.capital_game(username, players)
             #elif*************여기에 각자 게임추가하기*************
+            
 
         except ValueError:
             print('숫자를 입력해주세요!')
@@ -129,20 +140,20 @@ def select_game():
 def select_game_auto(cur_selector):
     game_choice = str(random.randint(1, 5))
     print("""
-          --------------------------------------------------
-                       🍺오늘의 Alcohol GAME🍺
-          --------------------------------------------------
+    --------------------------------------------------
+                🍺오늘의 Alcohol GAME🍺
+    --------------------------------------------------
 
-                        1. 이구동성 게임
-                        2.
-                        3.
-                        4. 수도 맞히기 게임
-                        5. 
-    
-          --------------------------------------------------
-          --------------------------------------------------
+                    1. 369 게임
+                    2. 
+                    3. 지하철 게임
+                    4. 수도 맞히기 게임
+                    5. 슈퍼개미 게임
 
-          """)
+    --------------------------------------------------
+    --------------------------------------------------
+
+    """)
     user_input = input("술게임 진행중! 다른 사람의 턴입니다. 그만하고 싶으면 'exit'를, 계속하고 싶으면 아무 키나 입력해주세요: ")
     if user_input.lower() == 'exit':
         print("게임을 종료합니다.")
@@ -153,11 +164,12 @@ def select_game_auto(cur_selector):
         print(f"{cur_selector}이(가) 고른 다음 게임은 {game_choice}번 게임이야!")
         if game_choice == "1":
             return game_369.gameEngine(username, [player['name'] for player in players])
-        
-        #elif*************여기에 각자 게임추가하기*************
-        #elif*************여기에 각자 게임추가하기*************
+        elif game_choice == 3:
+            return subwayGame.subwayGame_start(username, [player['name'] for player in players if player['name'] != username])
+        elif game_choice == 5:
+                return pythongame5.antgame(players, username)
         elif game_choice == "4":
-            game_capital.capital_game(username, players)
+            return game_capital.capital_game(username, players)
         #elif*************여기에 각자 게임추가하기*************
 
     print("""
