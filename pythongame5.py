@@ -26,7 +26,6 @@ fail_player =[]
 def antgame(players, username):
     num_of_random_numbers = len(players)
     random_numbers = random.sample(number_range, num_of_random_numbers)
-    print(random_numbers)
 
     print('개미는~뚠뚠!🐜 오늘도~뚠뚠!🐜 열심히~주식~하네~🐜 오늘의 주식이 상승했는지 하강했는지 맞춰보세요!')
 

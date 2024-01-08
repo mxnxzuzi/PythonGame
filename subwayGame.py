@@ -15,8 +15,9 @@ def subwayGame_start(user, friends):
             line_num_dict[line_num].append(station_nm)
         else:
             line_num_dict[line_num] = [station_nm]
-    
+    print("▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱")
     print("🚇 지하철~지하철~지하철~지하철 🚇 🤔 몇호선~몇호선~몇호선~몇호선~ 🤔")
+    print("▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱ ▰ ▱")
     random_line_num = random.choice(list(line_num_dict.keys()))
     print(f"[{random_line_num}]")
 
@@ -36,10 +37,10 @@ def subwayGame_start(user, friends):
                     other_line_nums = [line_num for line_num in line_num_dict.keys() if line_num != random_line_num]
                     selected_line_num = random.choice(other_line_nums)
                     selected_station = random.choice(line_num_dict[selected_line_num])
-                    print(f"{player['name']}, {selected_station}을(를) 선택했습니다.")
+                    print(f"{player['name']}, 🚅 {selected_station}🚅 을(를) 선택했습니다.")
                 else:
                     selected_station = random.choice(line_num_dict[random_line_num])
-                    print(f"{player['name']}, {selected_station}을(를) 선택했습니다.")
+                    print(f"{player['name']}, 🚅 {selected_station}🚅 을(를) 선택했습니다.")
 
 
 
