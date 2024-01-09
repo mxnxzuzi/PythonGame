@@ -23,24 +23,29 @@ def gameEngine(player_name, player_list):
         clap = count369(i)
         if order == my_position:
             answer = input()
+            answer_clap_count = answer.count('짝')
+            answer_in_clap = '👏'*answer_clap_count
             if  clap > 0 and answer.count('짝') != clap:
-                print(f"{player_name} : {answer}...")
+                print(f"{player_name} : {answer_in_clap}...")
                 time.sleep(1)
-                print(f"{player_name} : 앗! 실수했다!")
+                print(f"{player_name} : 앗! 실수했다...")
                 return [player_name]
             elif clap == 0 and answer != str(i):
-                 print(f"{answer}...")
+                 print(f"{answer_in_clap}...")
                  time.sleep(1)
-                 print(f"{player_name} : 아... 잘못 말했네!")
+                 print(f"{player_name} : 아... 실수했다..")
                  return [player_name]
+            elif clap > 0:
+                print(f"{player_name} :", answer_in_clap)
             else:
                 print(f"{player_name} :", answer)
+
         else:
             if clap:
                 if random.random() > fail_prob * (clap+1):
-                    print(f'{player_list[order]} :','짝'*clap)
+                    print(f'{player_list[order]} :','👏'*clap)
                 else:
-                    print(f'{player_list[order]} :','짝'*(clap-1),"...")
+                    print(f'{player_list[order]} :','👏'*(clap-1),"...")
                     time.sleep(1)
                     print(f'{player_list[order]} : 앗, 실수했다...')
                     return [player_list[order]]
